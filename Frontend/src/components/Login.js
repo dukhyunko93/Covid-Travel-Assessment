@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router'
-
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
   export default class Login extends Component {
 /*Todo Refactor
@@ -12,8 +16,6 @@ import { Redirect } from 'react-router'
         redirect: false
     }
 
-    
-    
     setCookie = (cname, cvalue, exdays) => {
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -65,33 +67,51 @@ import { Redirect } from 'react-router'
         }
 
         return (
-            <div className="login">
-                    <form onSubmit={this.submitHandler}>
-                        <h3>Log In</h3>
-
-                        <div className="form-group">
-                            <label>Username</label>
-                            <input type="username" name="user_name" value={this.state.user_name} onChange={(e) => this.onChangeHandler(e)} className="form-control" placeholder="Enter username" />
-                        </div>
-
-                        <div className="form-group">
-                            <label>Password</label>
-                            <input type="password" name="password" value={this.state.password} onChange={(e) => this.onChangeHandler(e)} className="form-control" placeholder="Enter password" />
-                        </div>
-
-                        <div className="form-group">
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                                <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                            </div>
-                        </div>
-
-                        <button type="submit" className="btn btn-primary btn-block">Submit</button>
-                        <p className="forgot-password text-right">
-                            Forgot <a href="#">password?</a>
-                        </p>
+                <Container style={{marginTop: "100px"}} component="main" maxWidth="xs">
+                  <CssBaseline />
+                  <div>
+                    <Typography component="h1" variant="h5">
+                      Sign in
+                    </Typography>
+                    <form style={{width: "100%"}} onSubmit={this.submitHandler} noValidate>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        value={this.state.user_name} 
+                        onChange={(e) => this.onChangeHandler(e)}
+                        id="user_name"
+                        label="Email Address"
+                        name="user_name"
+                        autoComplete="username"
+                        autoFocus
+                      />
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        value={this.state.password} 
+                        onChange={(e) => this.onChangeHandler(e)}
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                      />
+                      <Button
+                        style={{marginTop:"10px"}}
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                      >
+                        Sign In
+                      </Button>
                     </form>
-                </div>
+                  </div>
+                </Container>
         );
     }
 }
