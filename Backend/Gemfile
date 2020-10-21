@@ -19,6 +19,7 @@ gem 'activerecord-import'
 gem "figaro"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+gem 'down', '~> 1.1'
 gem 'whenever', require: false
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

@@ -69,6 +69,7 @@ GEM
     chronic (0.10.2)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
+    down (1.1.0)
     erubi (1.9.0)
     ffi (1.13.1)
     ffi (1.13.1-java)
@@ -190,6 +191,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
+  down (~> 1.1)
   figaro
   jwt
   listen (~> 3.2)

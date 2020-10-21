@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
         before_action :authorized
         
-    
+     
         def encode_token(payload)
           # should store secret in env variable
           JWT.encode(payload, ENV["app_secret"])
@@ -24,7 +24,9 @@ class ApplicationController < ActionController::API
             end
           end
         end
-      
+           
+                   
+            
        
         def current_user
           if decoded_token

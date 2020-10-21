@@ -1,23 +1,43 @@
 require 'csv'
 require 'net/http'
-require 'active_record'
 require 'activerecord-import'
+ require 'objspace'
 
 class Nytuscounty < ApplicationRecord
 
 
     ## The data within NYT is total and there are some counties that do not have fips such as NY as the boroughs are all within NYC.... so sad le sigh.
     def self.get_data_first
-        uri = URI.parse('https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv')
-        res = Net::HTTP.get(uri)
+        Nytuscounty.delete_all
+
+        uri = URI.open('https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv')
+        file  = CSV.parse(uri, headers: true)
+
         items = []
-        CSV.parse(res, headers: true) do |row|
-            items << row.to_h
-        end
+        row_count = 1
+        chunk_count = 1
         
-        Nytuscounty.upsert_all(items)
+        puts "looping..."
+        file.each do |row|
+            if chunk_count < 90000
+                items << row.to_h
+                chunk_count += 1
+                row_count += 1
+                if row_count == (file.length - 6)
+                    Nytuscounty.import(items)
+                    puts "just completed the final loop"
+                end
+            else
+                Nytuscounty.import(items)
+                chunk_count = 1
+                items = []
+                puts "just completed a loop"
+            end
+        end
+        puts "done!"
     end
 
+    # 651162
     def self.update_data
         uri = URI.parse('https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv')
         res = Net::HTTP.get(uri)
