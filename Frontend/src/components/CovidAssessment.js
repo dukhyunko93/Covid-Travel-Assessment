@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ListItem, ListItemLabel } from "baseui/list";
-import {Notification, KIND} from 'baseui/notification';
-import {Button} from 'baseui/button';
+import {Notification} from 'baseui/notification';
+import {Button, KIND, SIZE, SHAPE} from 'baseui/button';
 
  /*The hot spots map shows the share of population with a new reported case over the last week. 
  Parts of a county with a population density lower than 10 people per square mile are not shaded. 
@@ -53,8 +53,7 @@ Controlled Transmission
 export default (props) => {
 const {cases, death, level, delta, stateInfo} = props;
 
-    // if (!cases || !death || !level || !delta) return null;
-
+    // if (!cases || !death || !level || !delta) return null;  
     const renderRiskStatus = () => <Notification 
         kind={level.color}
         overrides={{
@@ -76,25 +75,13 @@ const {cases, death, level, delta, stateInfo} = props;
     </ul>;
 
    
-    const stateInfoLinks = () => <ul>
-     
-        <ListItem endEnhancer={() => <ListItemLabel>
-                <Button $as="a" href={stateInfo?.covid19Site} target="_blank">State Info</Button>
-                </ListItemLabel>}>
-        </ListItem>
-        <ListItem endEnhancer={() => <ListItemLabel>
-                <Button $as="a" href={stateInfo?.covid19SiteSecondary} target="_blank">Secondary State Info</Button>
-                </ListItemLabel>}>
-        </ListItem>
-        <ListItem endEnhancer={() => <ListItemLabel>
-                <Button $as="a" href={stateInfo?.covid19SiteTertiary} target="_blank">Tertiary State Info</Button>
-                </ListItemLabel>}>
-        </ListItem>
-        <ListItem endEnhancer={() => <ListItemLabel>
-                <Button $as="a" href={`https://twitter.com/${stateInfo?.twitter}`} target="_blank">Twitter Account</Button>
-                </ListItemLabel>}>
-        </ListItem>
-        </ul>
+    const stateInfoLinks = () => 
+    <>
+        <Button kind={KIND.secondary} size={SIZE.compact} shape={SHAPE.pill} style={{margin: "10px"}} $as="a" href={stateInfo?.covid19Site} target="_blank">State Info</Button>
+        <Button kind={KIND.secondary} size={SIZE.compact} shape={SHAPE.pill} style={{margin: "10px"}} $as="a" href={stateInfo?.covid19SiteSecondary} target="_blank">Secondary State Info</Button>
+        <Button kind={KIND.secondary} size={SIZE.compact} shape={SHAPE.pill} style={{margin: "10px"}} $as="a" href={stateInfo?.covid19SiteTertiary} target="_blank">Tertiary State Info</Button>
+        <Button kind={KIND.secondary} size={SIZE.compact} shape={SHAPE.pill} style={{margin: "10px"}} $as="a" href={`https://twitter.com/${stateInfo?.twitter}`} target="_blank">Twitter Account</Button>
+    </>
 
   return (
   <>

@@ -58,12 +58,12 @@ button {
 }  
 
 .left-nav {
-  height: 30%;
+  height: 25%;
   width: 0;
+  left: 0;
   top: 15%;
   position: fixed;
   z-index: 0;
-  left: 0;
   background-color: white;
   overflow-x: hidden;
   transition: 0.2s;
@@ -135,7 +135,7 @@ button {
 }
 
 h4.search-bar{
-  padding-left: 5px;
+  margin: 10px;
 }
 
 .left-nav-button-container{

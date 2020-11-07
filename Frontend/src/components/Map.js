@@ -403,7 +403,9 @@ function SearchPlace({ panTo, selectDestination }) {
             placeholder="Enter a destination address"
           />
           <ComboboxPopover>
-            <ComboboxList>
+            <ComboboxList
+            autocomplete={false}
+            >
               {status === "OK" && 
                 data.map(({place_id, description}) => (
                   <ComboboxOption key={place_id} value={description}/>

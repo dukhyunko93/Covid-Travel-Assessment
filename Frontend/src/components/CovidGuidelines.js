@@ -1,21 +1,22 @@
 import * as React from 'react';
 import { Accordion, Panel } from "baseui/accordion";
-import { ListItem, ListItemLabel } from "baseui/list";
+import "../style/Guideline.css"
 
 
 export default ({guideline}) => {
+    console.log(guideline)
     if (!guideline) return null;
     return (
         <Accordion>
             <Panel title="Daily Life">
-                <ul>
-                    {(guideline?.dailyLife || []).map(life => <ListItem><ListItemLabel key={life}>{life}</ListItemLabel></ListItem>)}
-                </ul>
+                <ol>
+                    {(guideline?.dailyLife || []).map(life => <li className="guidelineLife">{life}</li>)}
+                </ol>
             </Panel>
             <Panel title="Group Life">
-                <ul>
-                    {(guideline?.groupLife || []).map(life => <ListItem><ListItemLabel key={life}>{life}</ListItemLabel></ListItem>)}
-                </ul>
+                <ol>
+                    {(guideline?.groupLife || []).map(life => <li className="guidelineLife">{life}</li>)}
+                </ol>
             </Panel>
         </Accordion>);
 };

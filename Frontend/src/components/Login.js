@@ -13,7 +13,8 @@ import Container from '@material-ui/core/Container';
     state = {
         user_name: "",
         password: "",
-        redirect: false
+        redirect: false,
+        incorrectInfo: false,
     }
 
     setCookie = (cname, cvalue, exdays) => {
@@ -39,7 +40,12 @@ import Container from '@material-ui/core/Container';
         }
         
         fetch("http://localhost:3001/login", options)
-        .then(response => response.json())
+        .then(response => {
+          if(!response.ok){
+            return this.setState({ incorrectInfo: true })
+          }
+          return response.json()
+        })
         .then(response => {
             this.setCookie("jwt",response.jwt,1)
             this.props.saveUser(response)
@@ -47,8 +53,6 @@ import Container from '@material-ui/core/Container';
         })
             
     }
-
-
 
     onChangeHandler = (e) => {
         this.setState({[e.target.name]: e.target.value})
@@ -65,7 +69,6 @@ import Container from '@material-ui/core/Container';
         if (redirect) {
           return <Redirect to='/'/>;
         }
-
         return (
                 <Container style={{marginTop: "100px"}} component="main" maxWidth="xs">
                   <CssBaseline />
@@ -100,6 +103,7 @@ import Container from '@material-ui/core/Container';
                         id="password"
                         autoComplete="current-password"
                       />
+                      {this.state.incorrectInfo ? <p style={{color:"red"}}>Wrong account or password.</p> : null}
                       <Button
                         style={{marginTop:"10px"}}
                         type="submit"

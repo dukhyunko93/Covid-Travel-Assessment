@@ -231,15 +231,14 @@ class Tripinfo extends React.Component {
             >
             
             <div style={{display: "flex"}}>
-                <div className="data-table">
-                    <CovidTable population={this.state.population} covidData={this.state.covidData} />
-                </div>
                 <div className="assessment">
                     <CovidAssessment cases={cases[YESTERDAY]} death={deaths[YESTERDAY]} delta={delta} level={level} stateInfo={this.state.stateInfo} />
                 </div>
+                <div className="data-table">
+                    <CovidTable population={this.state.population} covidData={this.state.covidData} />
+                </div>
                 <div className="guidelines">
                     <CovidGuidelines guideline={guideline} />
-                    
                 </div>
             </div>
             
